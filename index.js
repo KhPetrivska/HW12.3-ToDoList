@@ -14,7 +14,7 @@ function addDeleteButton(li) {
 }
 
 listContainer.addEventListener("click", function (event) {
-  if (event.target.className === "delete-btn") {
+  if (event.target.tagName === "BUTTON") {
     event.target.parentElement.remove();
   }
 });
@@ -22,10 +22,12 @@ listContainer.addEventListener("click", function (event) {
 document.addEventListener("click", function (event) {
   if (event.target.className === "add-btn") {
     const newTask = document.getElementById("userInput").value;
-    const newlistElement = document.createElement("li");
-    newlistElement.textContent = newTask;
-    listContainer.appendChild(newlistElement);
-    addDeleteButton(newlistElement);
+    if (newTask?.trim()) {
+      const newlistElement = document.createElement("li");
+      newlistElement.textContent = newTask;
+      listContainer.appendChild(newlistElement);
+      addDeleteButton(newlistElement);
+    }
     document.getElementById("userInput").value = "";
   }
 });
